@@ -10,6 +10,8 @@ from params import params as Params
 from core4 import core_controller as Core
 from sklearn.metrics import confusion_matrix
 import math
+import logging
+logging.basicConfig(level=logging.INFO)
 
 
 def generate_output_config(dataset, SF, forget_threshold,temporal_contexts, output_save_location):
@@ -73,14 +75,14 @@ def evaluate(classifier, Y_test, y_pred):
     AUC = (tp / (tp + fn) + tn / (tn + fp)) / 2
 
     print(classifier, " finished executing")
-    print("\nClassifier: " + classifier)
-    print("f_score: " + str(f_score))
-    print("g_mean: " + str(g_mean))
-    print("AUC value: " + str(AUC) + "\n")
+    logging.info("\nClassifier: " + classifier)
+    logging.info("f_score: " + str(f_score))
+    logging.info("g_mean: " + str(g_mean))
+    logging.info("AUC value: " + str(AUC) + "\n")
 
     return [classifier, f_score, g_mean, AUC]
 
 # y_test, y_pred =run()
 # evaluate("GSOM_Classifier",y_test, np.array(y_pred).astype(int))
 
-print('Completed.')
+logging.info('Completed.')
